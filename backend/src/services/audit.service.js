@@ -6,6 +6,8 @@ const { extractSEOData } = require("./seo.service");
 const { extractImageData } = require("./image.service");
 const { extractLinkData } = require("./link.service");
 const { extractSecurityData } = require("./security.service");
+const { extractRobotsData } = require("./robots.service");
+const { extractPerformanceData } = require("./performance.service");
 
 const auditUrl = async (url) => {
   try {
@@ -32,6 +34,12 @@ const seo = extractSEOData($);
 const images = extractImageData($);
 const links = extractLinkData($, url);
 const security = extractSecurityData(response.headers, url);
+const robots = await extractRobotsData(url);
+const performance = extractPerformanceData(
+  $,
+  response,
+  responseTime
+);
 const result = {
   url,
   status: response.status,
@@ -40,6 +48,8 @@ const result = {
   images,
   links,
   security,
+  robots,
+  performance,
 };
 
 cache.set(url, result);
