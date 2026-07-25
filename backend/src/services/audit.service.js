@@ -8,6 +8,7 @@ const { extractLinkData } = require("./link.service");
 const { extractSecurityData } = require("./security.service");
 const { extractRobotsData } = require("./robots.service");
 const { extractPerformanceData } = require("./performance.service");
+const { calculateOverallScore } = require("./overall.service");
 
 const auditUrl = async (url) => {
   try {
@@ -40,10 +41,19 @@ const performance = extractPerformanceData(
   response,
   responseTime
 );
+const overall = calculateOverallScore({
+  seo,
+  images,
+  links,
+  security,
+  robots,
+  performance,
+});
 const result = {
   url,
   status: response.status,
   responseTime: `${responseTime} ms`,
+  overall,
   seo,
   images,
   links,
