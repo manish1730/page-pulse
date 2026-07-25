@@ -1,6 +1,6 @@
 const { auditUrl } = require("../services/audit.service");
 
-const auditWebsite = async (req, res) => {
+const auditWebsite = async (req, res, next) => {
   try {
     const { url } = req.body;
 
@@ -10,14 +10,8 @@ const auditWebsite = async (req, res) => {
       success: true,
       data: result,
     });
-
   } catch (error) {
-
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-
+    next(error);
   }
 };
 
