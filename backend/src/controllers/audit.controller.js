@@ -8,6 +8,7 @@ const auditWebsite = async (req, res, next) => {
 
     return res.status(200).json({
       success: true,
+      requestId: req.requestId,
       data: result,
     });
   } catch (error) {

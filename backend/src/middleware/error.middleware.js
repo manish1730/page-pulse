@@ -3,6 +3,7 @@ const errorHandler = (err, req, res, next) => {
 
   res.status(statusCode).json({
     success: false,
+    requestId: req.requestId,
     error: err.errorCode || "INTERNAL_ERROR",
     message: err.message || "Something went wrong",
   });
