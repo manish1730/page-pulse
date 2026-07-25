@@ -2,6 +2,8 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 const AppError = require("../utils/AppError");
 const cache = require("../cache/cache");
+const { extractSEOData } = require("./seo.service");
+const { extractImageData } = require("./image.service");
 
 const auditUrl = async (url) => {
   try {
@@ -24,11 +26,14 @@ const responseTime = Date.now() - start;
 
 const $ = cheerio.load(response.data);
 
+const seo = extractSEOData($);
+const images = extractImageData($);
 const result = {
   url,
   status: response.status,
   responseTime: `${responseTime} ms`,
-  title: $("title").text(),
+  seo,
+  images,
 };
 
 cache.set(url, result);
