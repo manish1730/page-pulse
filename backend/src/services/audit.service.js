@@ -4,6 +4,8 @@ const AppError = require("../utils/AppError");
 const cache = require("../cache/cache");
 const { extractSEOData } = require("./seo.service");
 const { extractImageData } = require("./image.service");
+const { extractLinkData } = require("./link.service");
+const { extractSecurityData } = require("./security.service");
 
 const auditUrl = async (url) => {
   try {
@@ -28,12 +30,16 @@ const $ = cheerio.load(response.data);
 
 const seo = extractSEOData($);
 const images = extractImageData($);
+const links = extractLinkData($, url);
+const security = extractSecurityData(response.headers, url);
 const result = {
   url,
   status: response.status,
   responseTime: `${responseTime} ms`,
   seo,
   images,
+  links,
+  security,
 };
 
 cache.set(url, result);
