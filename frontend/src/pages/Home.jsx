@@ -29,7 +29,6 @@ const Home = () => {
     const response = await api.post("/audit", {
       url,
     });
-   console.log(response.data.data.seo);
     if (response.data.success) {
    setResult(response.data.data);
   }
