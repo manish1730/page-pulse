@@ -24,7 +24,7 @@ const extractSEOData = ($) => {
     issues.push({
       type: "missing-title",
       severity: "high",
-      recommendation: "Add a descriptive title tag."
+      recommendation: "Add a descriptive title tag.",
     });
   }
 
@@ -34,7 +34,7 @@ const extractSEOData = ($) => {
     issues.push({
       type: "missing-meta-description",
       severity: "medium",
-      recommendation: "Add a meta description."
+      recommendation: "Add a meta description.",
     });
   }
 
@@ -44,7 +44,7 @@ const extractSEOData = ($) => {
     issues.push({
       type: "missing-canonical",
       severity: "low",
-      recommendation: "Add a canonical URL."
+      recommendation: "Add a canonical URL.",
     });
   }
 
@@ -54,7 +54,7 @@ const extractSEOData = ($) => {
     issues.push({
       type: "missing-h1",
       severity: "medium",
-      recommendation: "Include at least one H1 heading."
+      recommendation: "Include at least one H1 heading.",
     });
   }
 
@@ -64,11 +64,11 @@ const extractSEOData = ($) => {
     issues.push({
       type: "multiple-h1",
       severity: "low",
-      recommendation: "Use a single H1 heading."
+      recommendation: "Use a single H1 heading.",
     });
   }
 
-  issues.forEach(issue => {
+  issues.forEach((issue) => {
     recommendations.push(issue.recommendation);
   });
 
