@@ -14,7 +14,6 @@ app.use(compression());
 app.use(express.json());
 app.use(requestLogger);
 app.use("/api/v1", auditRoutes);
-app.use(errorHandler);
 
 
 app.get("/health", (req, res) => {
@@ -24,4 +23,5 @@ app.get("/health", (req, res) => {
   });
 });
 
+app.use(errorHandler);
 module.exports = app;
